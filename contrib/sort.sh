@@ -3,7 +3,7 @@
 # Angstrom feed sorting script
 # This must be run in unsorted/ directory 
 
-ipkg_tools_path="/home/angstrom/bin"
+ipkg_tools_path="/home/camol/bin"
 
 if [ $(basename $PWD) != "unsorted" ] ; then
 	echo "Not in feed dir! Exiting"
@@ -37,7 +37,7 @@ cat files-duplicate | xargs rm -f
 for i in $(find . -name "*.ipk") ; do basename $i ; done > files-sorted-new
 
 # Log remaining packages to a file 
-find . -name "*.ipk" |grep -v dbg | grep -v -- -dev | grep -v -- -doc | grep -v -- -static | grep -v angstrom-version | grep -v locale > new-files.txt
+find . -name "*.ipk" |grep -v dbg | grep -v -- -dev | grep -v -- -doc | grep -v -- -static | grep -v camol-version | grep -v locale > new-files.txt
 for newfile in $(cat new-files.txt | sed s:./::g) ; do
     echo "$(date -u +%s) $newfile $(basename ${PWD})" >> ../upload-full.txt
 done    

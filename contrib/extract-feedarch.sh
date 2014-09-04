@@ -4,7 +4,7 @@ if [ ! -d archs ] ; then
 	mkdir archs
 fi
 
-for feedconfig in $(find . -name "angstrom-feed-configs_*") ; do
+for feedconfig in $(find . -name "camol-feed-configs_*") ; do
 	rm -rf feedtemp ; mkdir feedtemp
 	dpkg-deb -X $feedconfig feedtemp >& /dev/null
 	echo $(tail -n1 feedtemp/etc/opkg/arch.conf | awk '{print $2}') >> archs/$(tail -n2 feedtemp/etc/opkg/arch.conf | head -n1 | awk '{print $2}')

@@ -1,4 +1,4 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/angstrom:"
+FILESEXTRAPATHS_prepend := "${THISDIR}/camol:"
 
 SRC_URI += "file://settings"
 
@@ -7,8 +7,7 @@ do_install_append() {
 	install -m 0644 ${WORKDIR}/settings ${D}${localstatedir}/lib/connman/
 }
 
-PACKAGES =+ "${PN}-angstrom-settings"
+PACKAGES =+ "${PN}-camol-settings"
 
-FILES_${PN}-angstrom-settings = "${localstatedir}/lib/connman/settings"
-RDEPENDS_${PN}-angstrom-settings = "${PN}"
-LICENSE_FLAGS_${PN}-angstrom-settings = "non-commercial"
+FILES_${PN}-camol-settings = "${localstatedir}/lib/connman/settings"
+RDEPENDS_${PN}-camol-settings = "${PN}"

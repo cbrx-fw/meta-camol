@@ -4,11 +4,11 @@
 
 # Run this from inside ${DEPLOY_DIR} e.g. tmp/deploy/glibc/
 
-# Angstrom webserver
-REMOTEM=angstrom@linuxtogo.org
+# Cambrionix Linux webserver
+REMOTEM=camol@nowherereally.org
 
 # Feed dir we want to upload to
-REMOTED=website/feeds/core/ipk/$(basename $PWD | sed s:angstrom::g)/packaged-staging/
+REMOTED=website/feeds/core/ipk/$(basename $PWD | sed s:camol::g)/packaged-staging/
 
 # create upload dir
 mkdir -p upload-queue || true

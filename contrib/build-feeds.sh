@@ -42,7 +42,7 @@ do_report_success() {
 
 # noarch packages (e.g. PACKAGE_ARCH=all in OE)
 
-BUILD_MACHINE="beagleboard"
+BUILD_MACHINE="whippet"
 BUILD_CLEAN=""
 BUILD_TARGETS=""
 do_build
@@ -75,8 +75,8 @@ do
                       opkg-native \
                       abiword \
                       aircrack-ng \
-                      angstrom-packagegroup-gnome \
-                      angstrom-zeroconf-audio \
+                      camol-packagegroup-gnome \
+                      camol-zeroconf-audio \
                       apache2 \
                       artoolkit \
                       asciidoc \
@@ -436,7 +436,7 @@ do
             BUILD_CLEAN="qmake-native qmake2-native qt-x11-free python python-native python-pygtk gnome-icon-theme"
         BUILD_TARGETS="packagegroup-base packagegroup-boot \
                        packagegroup-opie packagegroup-opie-all \
-                       angstrom-x11-base-depends angstrom-gpe-packagegroup-settings \
+                       camol-x11-base-depends camol-gpe-packagegroup-settings \
                        xserver-xorg-conf \ 
                        "
 

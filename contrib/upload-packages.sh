@@ -4,8 +4,8 @@
 
 # Run this from inside ${DEPLOY_DIR} e.g. tmp/deploy/glibc/
 
-# Angstrom webserver
-REMOTEM=angstrom@eu.feeds.angstrom-distribution.org
+# Cambrionix Linux webserver
+REMOTEM=camol@somewebserverorother.co.uk
 
 # Feed dir we want to upload to
 REMOTED=website/feeds/core/ipk/$(basename $PWD)

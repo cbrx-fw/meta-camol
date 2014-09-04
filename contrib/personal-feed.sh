@@ -4,7 +4,7 @@
 
 # Run this from inside ${DEPLOY_DIR} e.g. tmp/deploy/glibc/
 
-# Angstrom webserver
+# Cambrionix Linux webserver
 REMOTEM=http://www.angstrom-distribution.org
 
 # Feed dir we want to upload to

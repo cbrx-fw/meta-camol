@@ -10,32 +10,3 @@ URI: git://git.openembedded.org/meta-openembedded
 branch: master
 revision: HEAD
 
-==============================
-           Setup
-==============================
-
-It is recommended to follow the instruction at http://www.angstrom-distribution.org/building-angstrom
-
-This will set it up for the OpenEmbedded-core layout needed for this layer instead of the old OpenEmbedded-dev layout.
-
-==============================
-       Test Reports
-==============================
-
-To see which machines and packages were successfully built, check the buildhistory git repository:
-
-https://github.com/Angstrom-distribution/buildhistory
-
-==============================
-          Patches
-==============================
-
-Send pull requests to angstrom-distro-devel@linuxtogo.org with '[meta-angstrom-v2012.12]' in the subject'
-
-When sending single patches, please use something like 'git send-email -1 --to angstrom-distro-devel@linuxtogo.org --subject-prefix meta-angstrom-v2012.12'
-
-You are encouraged to fork the mirror on github https://github.com/koenkooi/meta-angstrom to share your patches, this is preferred for patch sets consisting of more than one patch. Other services like gitorious, repo.or.cz or self hosted setups are of course accepted as well, 'git fetch <remote>' works the same on all of them. We recommend github because it is free, easy to use, has been proven to be reliable and has a really good web GUI.
-
-Main layer maintainer: Koen Kooi <koen@dominion.thruhere.net>
-
-
