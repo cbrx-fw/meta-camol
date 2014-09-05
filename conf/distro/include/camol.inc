@@ -5,7 +5,7 @@
 # Preserve original DISTRO value
 USERDISTRO := "${DISTRO}"
 DISTRO = "camol"
-DISTRO_NAME = "Cambrionix Linux"
+DISTRO_NAME = "CambrionixLinux"
 
 BUILDNAME = "Cambrionix Linux ${DISTRO_VERSION}"
 
