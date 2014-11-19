@@ -6,7 +6,7 @@ mount /dev/mmcblk0p3 /rw
 if [ -e /rw/update_flag ]; then
 	umount /rw
 	BOOT_ROOT="/new_root"
-	mkdir /root
+	mkdir /new_root
 	mount /dev/mmcblk0p2 /new_root
 else
 	mkdir /ro
