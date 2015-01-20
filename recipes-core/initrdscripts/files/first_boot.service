@@ -1,0 +1,10 @@
+[Unit]
+Description=First boot script to clear never_booted flag
+
+[Service]
+Type=oneshot
+ExecStartPre=/bin/sh -c 'sleep 10s'
+ExecStart=/usr/bin/first_boot.sh
+
+[Install]
+WantedBy=multi-user.target
