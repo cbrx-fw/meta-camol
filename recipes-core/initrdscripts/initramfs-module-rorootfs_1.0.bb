@@ -13,7 +13,7 @@ do_install() {
 	install -d ${D}${base_prefix}/initrd.d
         install -m 0755 ${WORKDIR}/80-rorootfs.sh ${D}${base_prefix}/initrd.d/
 	install -d ${D}${base_libdir}/systemd/system/multi-user.target.wants/
-	install -m 0644 ${S}/first_boot.service ${D}${base_libdir}/systemd/system
+	install -m 0644 ${WORKDIR}/first_boot.service ${D}${base_libdir}/systemd/system
 	ln -s ../first_boot.service ${D}${base_libdir}/systemd/system/multi-user.target.wants/first_boot.service
 	install -d ${D}${base_prefix}/usr/bin
 	install -m 0700 ${WORKDIR}/first_boot.sh ${D}/usr/bin
