@@ -1,5 +1,8 @@
+PRINC := "${@int(PRINC) + 1}"
+
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
+SRCREV = "dee4c244254bb49d1ffa8bd7171ae9cce596d2d0"
 SRC_URI += "file://journald.conf \
             file://camol.conf \
             file://first_boot.service \
