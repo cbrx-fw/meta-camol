@@ -4,7 +4,6 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRCREV = "dee4c244254bb49d1ffa8bd7171ae9cce596d2d0"
 SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
-           file://0002-Revert-analyze-use-GDBus-instead-of-dbus-python.patch \
            file://0002-readahead-don-t-complain-that-we-cannot-precache-sym.patch \
            file://0003-readahead-chunk-on-spinning-media.patch \
            file://0004-readahead-cleanups.patch \
