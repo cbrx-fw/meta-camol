@@ -1,8 +1,8 @@
-PRINC := "${@int(PRINC) + 1}"
+PRINC := "${@int(PRINC) + 2}"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRCREV = "dee4c244254bb49d1ffa8bd7171ae9cce596d2d0"
+SRCREV = "24442f3b2598fbd0654aaf9d1370d596fedc83be"
 SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
            file://0003-readahead-chunk-on-spinning-media.patch \
            file://0004-readahead-cleanups.patch \
