@@ -15,7 +15,7 @@ DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 
 SECTION = "base/shell"
 
-inherit gtk-doc useradd pkgconfig autotools perlnative update-rc.d update-alternatives qemu systemd ptest
+inherit gtk-doc useradd pkgconfig autotools perlnative update-rc.d update-alternatives qemu systemd
 
 SRCREV = "3a450ec5c6adf3057bcedd6cc19c10617abc35a5"
 
@@ -36,7 +36,6 @@ SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;branch=master;protocol=
            file://touchscreen.rules \
            file://00-create-volatile.conf \
            file://init \
-           file://run-ptest \
            file://var-run.conf \
            file://journald.conf \
            file://camol.conf \
@@ -142,22 +141,6 @@ do_install() {
 	install -m 0700 ${WORKDIR}/first_boot.sh ${D}/usr/bin
 }
 
-do_install_ptest () {
-       install -d ${D}${PTEST_PATH}/test
-       cp -rf ${S}/test/* ${D}${PTEST_PATH}/test
-       install -m 0755  ${B}/test-udev ${D}${PTEST_PATH}/
-       install -d ${D}${PTEST_PATH}/build-aux
-       cp ${S}/build-aux/test-driver ${D}${PTEST_PATH}/build-aux/
-       cp -rf ${B}/rules ${D}${PTEST_PATH}/
-       # This directory needs to be there for udev-test.pl to work.
-       install -d ${D}${libdir}/udev/rules.d
-       cp ${B}/Makefile ${D}${PTEST_PATH}/
-       cp ${S}/test/sys.tar.xz ${D}${PTEST_PATH}/test
-       sed -i 's/"tree"/"ls"/' ${D}${PTEST_PATH}/test/udev-test.pl
-       sed -i 's#${S}#${PTEST_PATH}#g' ${D}${PTEST_PATH}/Makefile
-       sed -i 's#${B}#${PTEST_PATH}#g' ${D}${PTEST_PATH}/Makefile
-}
-
 python populate_packages_prepend (){
     systemdlibdir = d.getVar("rootlibdir", True)
     do_split_packages(d, systemdlibdir, '^lib(.*)\.so\.*', 'lib%s', 'Systemd %s library', extra_depends='', allow_links=True)
@@ -178,12 +161,6 @@ FILES_${PN}-analyze = "${bindir}/systemd-analyze"
 
 FILES_${PN}-initramfs = "/init"
 RDEPENDS_${PN}-initramfs = "${PN}"
-
-# The test cases need perl and bash to run correctly.
-RDEPENDS_${PN}-ptest += "perl bash"
-FILES_${PN}-ptest += "${libdir}/udev/rules.d"
-
-FILES_${PN}-dbg += "${libdir}/systemd/ptest/.debug"
 
 FILES_${PN}-gui = "${bindir}/systemadm"
 
