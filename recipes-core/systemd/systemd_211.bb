@@ -37,6 +37,11 @@ SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;branch=master;protocol=
            file://00-create-volatile.conf \
            file://init \
            file://run-ptest \
+           file://var-run.conf \
+           file://journald.conf \
+           file://camol.conf \
+           file://first_boot.service \
+           file://first_boot.sh \
           "
 
 S = "${WORKDIR}/git"
@@ -125,6 +130,16 @@ do_install() {
 
         # Delete journal README, as log can be symlinked inside volatile.
         rm -f ${D}/${localstatedir}/log/README
+
+	cp ${WORKDIR}/journald.conf ${D}${sysconfdir}/systemd
+	install -d ${D}${localstatedir}/volatile
+	mv ${D}${localstatedir}/log ${D}${localstatedir}/volatile/log
+	cp ${WORKDIR}/camol.conf ${D}${libdir}/tmpfiles.d
+	install -d ${D}${base_libdir}/systemd/system/multi-user.target.wants/
+	install -m 0644 ${WORKDIR}/first_boot.service ${D}${base_libdir}/systemd/system
+	ln -s ../first_boot.service ${D}${base_libdir}/systemd/system/multi-user.target.wants/first_boot.service
+	install -d ${D}${base_prefix}/usr/bin
+	install -m 0700 ${WORKDIR}/first_boot.sh ${D}/usr/bin
 }
 
 do_install_ptest () {
@@ -236,6 +251,8 @@ FILES_${PN} = " ${base_bindir}/* \
                 /lib/udev/rules.d/73-seat-late.rules \
                 /lib/udev/rules.d/99-systemd.rules \
                 ${@base_contains('DISTRO_FEATURES', 'pam', '${sysconfdir}/pam.d', '', d)} \
+		${base_libdir}/systemd \
+		${base_prefix}/usr/bin \
                "
 
 FILES_${PN}-dbg += "${rootlibdir}/.debug ${systemd_unitdir}/.debug ${systemd_unitdir}/*/.debug ${base_libdir}/security/.debug/"
