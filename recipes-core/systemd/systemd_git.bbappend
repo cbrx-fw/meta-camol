@@ -4,8 +4,6 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRCREV = "24442f3b2598fbd0654aaf9d1370d596fedc83be"
 SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
-           file://0003-readahead-chunk-on-spinning-media.patch \
-           file://0004-readahead-cleanups.patch \
            file://gtk-doc.make \
            file://touchscreen.rules \
            file://modprobe.rules \
