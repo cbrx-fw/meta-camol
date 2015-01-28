@@ -57,5 +57,6 @@ FILES_${PN}-examples = "${bindir}/*example*"
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM_${PN} = "--system --no-create-home --user-group --home-dir ${sysconfdir}/${BPN}-1 polkitd"
 
+SYSTEMD_PACKAGES = "${PN}"
 SYSTEMD_SERVICE_${PN} = "${BPN}.service"
 SYSTEMD_AUTO_ENABLE = "disable"
