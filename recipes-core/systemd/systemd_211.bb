@@ -148,10 +148,10 @@ python populate_packages_prepend (){
 PACKAGES_DYNAMIC += "^lib(udev|gudev|systemd).*"
 
 PACKAGES =+ "${PN}-gui ${PN}-vconsole-setup ${PN}-initramfs ${PN}-analyze ${PN}-kernel-install \
-             ${PN}-rpm-macros ${PN}-binfmt ${PN}-pam ${PN}-zsh"
+             ${PN}-rpm-macros ${PN}-systemd ${PN}-pam ${PN}-zsh"
 
-SYSTEMD_PACKAGES = "${PN}-binfmt"
-SYSTEMD_SERVICE_${PN}-binfmt = "systemd-binfmt.service"
+SYSTEMD_PACKAGES = "${PN}-systemd"
+SYSTEMD_SERVICE_${PN}-systemd = "systemd-binfmt.service"
 
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM_${PN} += "--system systemd-journal-gateway"
@@ -177,12 +177,12 @@ FILES_${PN}-rpm-macros = "${exec_prefix}/lib/rpm \
 
 FILES_${PN}-zsh = "${datadir}/zsh/site-functions"
 
-FILES_${PN}-binfmt = "${sysconfdir}/binfmt.d/ \
+FILES_${PN}-systemd = "${sysconfdir}/binfmt.d/ \
                       ${exec_prefix}/lib/binfmt.d \
                       ${rootlibexecdir}/systemd/systemd-binfmt \
                       ${systemd_unitdir}/system/proc-sys-fs-binfmt_misc.* \
                       ${systemd_unitdir}/system/systemd-binfmt.service"
-RRECOMMENDS_${PN}-binfmt = "kernel-module-binfmt-misc"
+RRECOMMENDS_${PN}-systemd = "kernel-module-binfmt-misc"
 
 RRECOMMENDS_${PN}-vconsole-setup = "kbd kbd-consolefonts"
 
