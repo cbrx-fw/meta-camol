@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=155db86cdbafa7532b41f390409283eb \
 
 DEPENDS = "expat glib-2.0 intltool-native gobject-introspection-stub mozjs"
 
-inherit autotools gtk-doc pkgconfig useradd systemd
+inherit autotools gtk-doc pkgconfig useradd # systemd
 
 PACKAGECONFIG = "${@base_contains('DISTRO_FEATURES', 'pam', 'pam', '', d)} \
                  ${@base_contains('DISTRO_FEATURES','systemd','systemd','consolekit',d)}"
@@ -57,6 +57,6 @@ FILES_${PN}-examples = "${bindir}/*example*"
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM_${PN} = "--system --no-create-home --user-group --home-dir ${sysconfdir}/${BPN}-1 polkitd"
 
-SYSTEMD_PACKAGES = "${PN}"
-SYSTEMD_SERVICE_${PN} = "${BPN}.service"
-SYSTEMD_AUTO_ENABLE = "disable"
+#SYSTEMD_PACKAGES = "${PN}"
+#SYSTEMD_SERVICE_${PN} = "${BPN}.service"
+#SYSTEMD_AUTO_ENABLE = "disable"
