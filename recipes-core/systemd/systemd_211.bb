@@ -324,6 +324,7 @@ ALTERNATIVE_PRIORITY[runlevel] ?= "300"
 
 pkg_postinst_udev-hwdb () {
 	if test -n "$D"; then
+		exit 1
 	else
 		udevadm hwdb --update
 	fi
