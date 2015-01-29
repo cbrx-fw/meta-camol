@@ -32,7 +32,7 @@ SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;branch=master;protocol=
            file://uclibc-sysinfo_h.patch \
            file://uclibc-get-physmem.patch \
            file://sd-bus-don-t-use-assert_return-to-check-for-disconne.patch \
-           \
+           file://gtk-doc.make \
            file://touchscreen.rules \
            file://00-create-volatile.conf \
            file://init \
@@ -102,6 +102,7 @@ do_configure_prepend() {
 	sed -i -e 's:=/root:=${ROOT_HOME}:g' ${S}/units/*.service*
 	sed -i -e 's:\$(LN_S) --relative -f:lnr:g' ${S}/Makefile.am
 	sed -i -e 's:\$(LN_S) --relative:lnr:g' ${S}/Makefile.am
+	cp ${WORKDIR}/gtk-doc.make ${S}/docs/
 }
 
 do_install() {
