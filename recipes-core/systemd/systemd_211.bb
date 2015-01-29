@@ -99,7 +99,7 @@ do_configure_prepend() {
 	else
 		cp -r ${S}/units ${S}/units.pre_sed
 	fi
-	sed -i -e 's:=/root:=${ROOT_HOME}:g' ${S}/units/*.service*
+	sed -i -e 's:=/root:=/home/root:g' ${S}/units/*.service*
 	sed -i -e 's:\$(LN_S) --relative -f:lnr:g' ${S}/Makefile.am
 	sed -i -e 's:\$(LN_S) --relative:lnr:g' ${S}/Makefile.am
 	cp ${WORKDIR}/gtk-doc.make ${S}/docs/
