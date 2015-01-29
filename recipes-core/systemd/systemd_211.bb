@@ -15,7 +15,7 @@ DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 
 SECTION = "base/shell"
 
-inherit gtk-doc useradd pkgconfig autotools perlnative update-rc.d update-alternatives systemd
+inherit useradd pkgconfig autotools perlnative update-rc.d update-alternatives systemd
 
 SRCREV = "3a450ec5c6adf3057bcedd6cc19c10617abc35a5"
 
@@ -81,6 +81,7 @@ EXTRA_OECONF = " --with-rootprefix=${rootprefix} \
                  --disable-coredump \
                  --disable-introspection \
                  --disable-kdbus \
+                 --disable-gtk-doc-html \ 
                  --enable-split-usr \
                  --without-python \
                  --with-sysvrcnd-path=${sysconfdir} \
