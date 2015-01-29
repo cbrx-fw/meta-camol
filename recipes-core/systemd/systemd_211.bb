@@ -10,12 +10,12 @@ PROVIDES = "udev"
 
 PE = "1"
 
-DEPENDS = "kmod docbook-sgml-dtd-4.1-native intltool-native gperf-native acl readline dbus libcap libcgroup glib-2.0 qemu-native util-linux"
+DEPENDS = "kmod docbook-sgml-dtd-4.1-native intltool-native gperf-native acl readline dbus libcap libcgroup glib-2.0 util-linux"
 DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 
 SECTION = "base/shell"
 
-inherit gtk-doc useradd pkgconfig autotools perlnative update-rc.d update-alternatives qemu systemd
+inherit gtk-doc useradd pkgconfig autotools perlnative update-rc.d update-alternatives systemd
 
 SRCREV = "3a450ec5c6adf3057bcedd6cc19c10617abc35a5"
 
@@ -324,8 +324,8 @@ ALTERNATIVE_PRIORITY[runlevel] ?= "300"
 
 pkg_postinst_udev-hwdb () {
 	if test -n "$D"; then
-		${@qemu_run_binary(d, '$D', '${base_bindir}/udevadm')} hwdb --update \
-			--root $D
+#		${@qemu_run_binary(d, '$D', '${base_bindir}/udevadm')} hwdb --update \
+#			--root $D
 	else
 		udevadm hwdb --update
 	fi
@@ -341,7 +341,7 @@ pkg_prerm_udev-hwdb () {
 
 # As this recipe builds udev, respect systemd being in DISTRO_FEATURES so
 # that we don't build both udev and systemd in world builds.
-python () {
-    if not oe.utils.contains ('DISTRO_FEATURES', 'systemd', True, False, d):
-        raise bb.parse.SkipPackage("'systemd' not in DISTRO_FEATURES")
-}
+#python () {
+#    if not oe.utils.contains ('DISTRO_FEATURES', 'systemd', True, False, d):
+#        raise bb.parse.SkipPackage("'systemd' not in DISTRO_FEATURES")
+#}
