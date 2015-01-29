@@ -324,8 +324,6 @@ ALTERNATIVE_PRIORITY[runlevel] ?= "300"
 
 pkg_postinst_udev-hwdb () {
 	if test -n "$D"; then
-#		${@qemu_run_binary(d, '$D', '${base_bindir}/udevadm')} hwdb --update \
-#			--root $D
 	else
 		udevadm hwdb --update
 	fi
