@@ -1,0 +1,44 @@
+From 8b59613aef3bf2460803b588d9a479ac48e40f6c Mon Sep 17 00:00:00 2001
+From: Andrew Goodbody <andrew.goodbody@cambrionix.com>
+Date: Fri, 30 Jan 2015 09:54:36 +0000
+Subject: [PATCH] Shut up annoying assertion
+
+---
+ src/libsystemd/sd-event/sd-event.c | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/src/libsystemd/sd-event/sd-event.c b/src/libsystemd/sd-event/sd-event.c
+index db76433..ef3a512 100644
+--- a/src/libsystemd/sd-event/sd-event.c
++++ b/src/libsystemd/sd-event/sd-event.c
+@@ -2176,9 +2176,12 @@ _public_ int sd_event_exit(sd_event *e, int code) {
+ _public_ int sd_event_get_now_realtime(sd_event *e, uint64_t *usec) {
+         assert_return(e, -EINVAL);
+         assert_return(usec, -EINVAL);
+-        assert_return(dual_timestamp_is_set(&e->timestamp), -ENODATA);
+         assert_return(!event_pid_changed(e), -ECHILD);
+ 
++	/* If we haven't run yet, just get the actual time */
++        if (!dual_timestamp_is_set(&e->timestamp))
++		return -ENODATA;
++
+         *usec = e->timestamp.realtime;
+         return 0;
+ }
+@@ -2186,9 +2189,12 @@ _public_ int sd_event_get_now_realtime(sd_event *e, uint64_t *usec) {
+ _public_ int sd_event_get_now_monotonic(sd_event *e, uint64_t *usec) {
+         assert_return(e, -EINVAL);
+         assert_return(usec, -EINVAL);
+-        assert_return(dual_timestamp_is_set(&e->timestamp), -ENODATA);
+         assert_return(!event_pid_changed(e), -ECHILD);
+ 
++	/* If we haven't run yet, just get the actual time */
++        if (!dual_timestamp_is_set(&e->timestamp))
++		return -ENODATA;
++
+         *usec = e->timestamp.monotonic;
+         return 0;
+ }
+-- 
+1.9.1
+

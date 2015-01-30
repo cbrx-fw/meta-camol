@@ -41,6 +41,7 @@ SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;branch=master;protocol=
            file://camol.conf \
            file://first_boot.service \
            file://first_boot.sh \
+           file://0001-Shut-up-annoying-assertion.patch \
           "
 
 S = "${WORKDIR}/git"
