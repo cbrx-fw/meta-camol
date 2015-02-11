@@ -41,6 +41,7 @@ do_install() {
 	echo "Built from branch: ${METADATA_BRANCH}" >> ${D}${sysconfdir}/camol-version
 	echo "Revision: ${METADATA_REVISION}" >> ${D}${sysconfdir}/camol-version
 	echo "Target system: ${TARGET_SYS}" >> ${D}${sysconfdir}/camol-version
+	echo $(date) >> ${D}${sysconfdir}/camol-version
 
 	echo "${@get_layers(bb, d)}" > ${D}${sysconfdir}/camol-build-info
 
