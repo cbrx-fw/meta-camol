@@ -15,7 +15,7 @@ DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
 
 SECTION = "base/shell"
 
-inherit useradd pkgconfig autotools perlnative update-rc.d update-alternatives systemd
+inherit useradd pkgconfig autotools perlnative update-alternatives systemd
 
 SRCREV = "3a450ec5c6adf3057bcedd6cc19c10617abc35a5"
 
@@ -278,7 +278,6 @@ FILES_udev += "${base_sbindir}/udevd \
                ${rootlibexecdir}/udev/rules.d/8*.rules \
                ${rootlibexecdir}/udev/rules.d/95*.rules \
                ${sysconfdir}/udev \
-               ${sysconfdir}/init.d/systemd-udevd \
                ${systemd_unitdir}/system/*udev* \
                ${systemd_unitdir}/system/*.wants/*udev* \
               "
@@ -286,15 +285,6 @@ FILES_udev += "${base_sbindir}/udevd \
 FILES_udev-utils = "${base_bindir}/udevadm ${datadir}/bash-completion/completions/udevadm"
 
 FILES_udev-hwdb = "${rootlibexecdir}/udev/hwdb.d"
-
-INITSCRIPT_PACKAGES = "udev"
-INITSCRIPT_NAME_udev = "systemd-udevd"
-INITSCRIPT_PARAMS_udev = "start 03 S ."
-
-python __anonymous() {
-    if not oe.utils.contains('DISTRO_FEATURES', 'sysvinit', True, False, d):
-        d.setVar("INHIBIT_UPDATERCD_BBCLASS", "1")
-}
 
 # TODO:
 # u-a for runlevel and telinit
