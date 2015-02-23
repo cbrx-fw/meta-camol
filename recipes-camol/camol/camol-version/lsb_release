@@ -1,6 +1,6 @@
 #!/bin/sh
-VERSION="$(cat /etc/camol-version | head -n1 | awk '{print $2}')"
-CODENAME="Core edition"
+VERSION="$(cat /etc/camol-version | head -n1 | awk '{print $3}')"
+CODENAME="EtherSync Core"
 
 case $1 in
 "-v")

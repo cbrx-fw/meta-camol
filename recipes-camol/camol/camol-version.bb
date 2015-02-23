@@ -5,7 +5,9 @@ PV = "${DISTRO_VERSION}"
 PR = "r11"
 PE = "2"
 
-SRC_URI = "file://lsb_release"
+SRC_URI = "file://lsb_release \
+           file://release_version \
+"
 
 PACKAGES = "${PN}"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -41,6 +43,7 @@ do_install() {
 	echo "Built from branch: ${METADATA_BRANCH}" >> ${D}${sysconfdir}/camol-version
 	echo "Revision: ${METADATA_REVISION}" >> ${D}${sysconfdir}/camol-version
 	echo "Target system: ${TARGET_SYS}" >> ${D}${sysconfdir}/camol-version
+	echo "Release Version: $(cat ${WORKDIR}/release_version)" >> ${D}${sysconfdir}/camol-version
 	echo $(date) >> ${D}${sysconfdir}/camol-version
 
 	echo "${@get_layers(bb, d)}" > ${D}${sysconfdir}/camol-build-info
@@ -49,7 +52,7 @@ do_install() {
 	echo "ID=camol" >> ${D}${sysconfdir}/os-release
 	echo "PRETTY_NAME=The Cambrionix Linux Distribution" >> ${D}${sysconfdir}/os-release
 	echo "ANSI_COLOR=1;35" >> ${D}${sysconfdir}/os-release
-	
+
 	install -d ${D}${bindir}
 	install -m 0755 ${WORKDIR}/lsb_release ${D}${bindir}/
 }
