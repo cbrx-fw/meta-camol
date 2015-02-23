@@ -39,7 +39,7 @@ def get_layers(bb, d):
 
 do_install() {
 	install -d ${D}${sysconfdir}
-	echo "Cambrionix Linux ${DISTRO_VERSION} (Core edition)" > ${D}${sysconfdir}/camol-version
+	echo "Cambrionix Linux ${DISTRO_VERSION} (EtherSync Core)" > ${D}${sysconfdir}/camol-version
 	echo "Built from branch: ${METADATA_BRANCH}" >> ${D}${sysconfdir}/camol-version
 	echo "Revision: ${METADATA_REVISION}" >> ${D}${sysconfdir}/camol-version
 	echo "Target system: ${TARGET_SYS}" >> ${D}${sysconfdir}/camol-version
