@@ -18,7 +18,7 @@ RCONFLICTS_${PN} = "ocf-linux"
 RREPLACES_${PN} = "ocf-linux"
 
 do_install_append() {
-	install -d ${D}${sysconfdir}/usr/lib/modules-load.d
+	install -d ${D}/usr/lib/modules-load.d
 	install -m 0644 ${WORKDIR}/cryptodev.conf ${D}/usr/lib/modules-load.d/
 }
 
