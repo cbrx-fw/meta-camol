@@ -20,7 +20,7 @@ RREPLACES_${PN} = "ocf-linux"
 
 do_install_append() {
 	install -d ${D}${sysconfdir}/usr/lib/modules-load.d
-	install -m 0644 ${S}/cryptodev.conf ${D}${sysconfdir}/usr/lib/modules-load.d/
+	install -m 0644 ${S}/../cryptodev.conf ${D}${sysconfdir}/usr/lib/modules-load.d/
 }
 
 FILES_${PN} += "/usr/lib/modules-load.d"
