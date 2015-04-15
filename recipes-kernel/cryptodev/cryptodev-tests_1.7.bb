@@ -5,7 +5,7 @@ SUMMARY = "A test suite for /dev/crypto device driver"
 DEPENDS += "openssl"
 
 SRC_URI += " \
-file://0001-Add-the-compile-and-install-rules-for-cryptodev-test.patch \
+file://0001-Add-the-compile-and-install-rules-for-cryptodev-test-1.7.patch \
 file://0002-Fix-tests-Makefile-usage-of-LDLIBS-vs.-LDFLAGS.patch \
 "
 
