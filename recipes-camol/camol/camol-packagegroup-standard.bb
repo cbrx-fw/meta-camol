@@ -10,7 +10,7 @@ RDEPENDS_${PN} = "\
     kernel-module-hmac \
     kernel-module-sha256-generic \
     kernel-module-authenc \
-    kernel-module-authencsn \
+    kernel-module-authencesn \
     kernel-module-cbc \
     kernel-module-des-generic \
     kernel-module-ecb \
