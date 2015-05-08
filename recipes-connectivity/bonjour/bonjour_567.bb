@@ -38,5 +38,8 @@ do_install() {
 	ln -s ../bonjour.service ${D}${base_libdir}/systemd/system/multi-user.target.wants/bonjour.service
 }
 
+FILES_${PN} = "${base_libdir}/systemd \
+		"
+
 SRC_URI[md5sum] = "6eff6d243a12a3d4b6fca03c05a9893b"
 SRC_URI[sha256sum] = "3239d9bb1e1e017be1ae12cff90802194b6e0312de628a1f324530b00b833018"
