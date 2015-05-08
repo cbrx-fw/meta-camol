@@ -1,0 +1,12 @@
+[Unit]
+Description=mDNSResponder daemon
+Requires=local-fs.target
+After=basic.target
+
+[Service]
+ExecStart=/usr/sbin/mdnsd
+RestartSec=1
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
