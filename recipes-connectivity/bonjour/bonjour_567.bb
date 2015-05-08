@@ -39,6 +39,7 @@ do_install() {
 }
 
 FILES_${PN} = "${base_libdir}/systemd \
+		/usr/sbin \
 		"
 
 SRC_URI[md5sum] = "6eff6d243a12a3d4b6fca03c05a9893b"
