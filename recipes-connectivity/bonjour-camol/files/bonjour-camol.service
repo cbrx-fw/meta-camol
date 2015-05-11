@@ -1,0 +1,12 @@
+[Unit]
+Description=Advertise as EtherSync device
+Requires=local-fs.target
+After=bonjour.service
+
+[Service]
+ExecStart=/usr/sbin/dns-sd -R %H _ethersync._tcp local 10001
+RestartSec=1
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
