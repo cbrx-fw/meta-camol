@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7ca
 do_install() {
 
 	install -d ${D}${base_libdir}/systemd/system/multi-user.target.wants/
-	install -m 0644 ${S}/bonjour-camol.service ${D}${base_libdir}/systemd/system
+	install -m 0644 ${S}/../bonjour-camol.service ${D}${base_libdir}/systemd/system
 	# systemd configuration
 	ln -s ../bonjour-camol.service ${D}${base_libdir}/systemd/system/multi-user.target.wants/bonjour-camol.service
 }
