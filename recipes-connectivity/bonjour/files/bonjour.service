@@ -1,7 +1,8 @@
 [Unit]
 Description=mDNSResponder daemon
-Requires=local-fs.target
-After=basic.target
+Requires=network.target
+After=remote-fs.target
+Wants=remote-fs.target
 
 [Service]
 Type=forking
