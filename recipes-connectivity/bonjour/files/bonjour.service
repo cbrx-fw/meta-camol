@@ -1,0 +1,14 @@
+[Unit]
+Description=mDNSResponder daemon
+Requires=network.target
+After=remote-fs.target
+Wants=remote-fs.target
+
+[Service]
+Type=forking
+ExecStart=/usr/sbin/mdnsd
+RestartSec=1
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
