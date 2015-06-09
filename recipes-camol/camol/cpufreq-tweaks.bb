@@ -17,8 +17,8 @@ do_compile() {
 
 do_install () {
 
-	install -d ${D}/${base_libdir}/systemd/system
-	install -m 0644 ${WORKDIR}/cpu-ondemand.* ${D}/${base_libdir}/systemd/system/
+	install -d ${D}${base_libdir}/systemd/system
+	install -m 0644 ${WORKDIR}/cpu-ondemand.* ${D}${base_libdir}/systemd/system/
 }
 
 NATIVE_SYSTEMD_SUPPORT = "1"
