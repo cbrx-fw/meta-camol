@@ -20,3 +20,4 @@ PACKAGES =+ "${PN}-camol-settings"
 
 FILES_${PN}-camol-settings = "${localstatedir}/lib/connman/settings"
 RDEPENDS_${PN}-camol-settings = "${PN}"
+FILES_${PN} += " ${systemd_unitdir}/system/ "
