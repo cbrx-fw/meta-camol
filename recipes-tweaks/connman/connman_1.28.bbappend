@@ -14,6 +14,8 @@ SRC_URI += "file://settings"
 do_install_append() {
 	install -d ${D}${localstatedir}/lib/connman/
 	install -m 0644 ${WORKDIR}/settings ${D}${localstatedir}/lib/connman/
+	install -d ${D}${systemd_unitdir}/system/multi-user.target.wants
+	ln -sf ../../../../lib/systemd/system/connman.service ${D}${systemd_unitdir}/system/multi-user.target.wants/connman.service
 }
 
 PACKAGES =+ "${PN}-camol-settings"
