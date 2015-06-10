@@ -7,5 +7,4 @@ PR = "r0"
 inherit packagegroup
 
 RDEPENDS_${PN} = "busybox-syslog-systemd \
-		  dropbear-systemd \
 "
