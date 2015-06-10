@@ -17,8 +17,9 @@ do_compile() {
 
 do_install () {
 
-	install -d ${D}${base_libdir}/systemd/system
+	install -d ${D}${base_libdir}/systemd/system/multi-user.target.wants
 	install -m 0644 ${WORKDIR}/cpu-ondemand.* ${D}${base_libdir}/systemd/system/
+	ln -sf ../cpu-ondemand.timer ${D}${systemd_unitdir}/system/multi-user.target.wants/cpu-ondemand.timer
 }
 
 NATIVE_SYSTEMD_SUPPORT = "1"
