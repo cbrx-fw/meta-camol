@@ -6,5 +6,5 @@ PR = "r0"
 
 inherit packagegroup
 
-RDEPENDS_${PN} = "\
+RDEPENDS_${PN} = "busybox-syslog-systemd \
 "
