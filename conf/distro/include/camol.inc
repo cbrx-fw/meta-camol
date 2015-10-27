@@ -33,18 +33,11 @@ MACHINEOVERRIDES .= ":${@bb.data.getVar('FEED_ARCH', d,1).replace('all','noarch'
 #INHERIT += "src_distribute_local"
 SRC_DIST_LOCAL ?= "symlink"
 
-# Can be "glibc", "eglibc" or "uclibc"
-TCLIBC ?= "eglibc"
+# Can be "glibc", "musl" or "uclibc"
+TCLIBC ?= "glibc"
 
 # The things *libc can provide.
-PREFERRED_PROVIDER_virtual/libc = "${TCLIBC}"
-PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}libc-initial = "${TCLIBC}-initial"
-PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}libc-for-gcc = "${TCLIBC}"
-
-# And the same as above for the nativesdk
-PREFERRED_PROVIDER_virtual/libc-nativesdk = "${TCLIBC}-nativesdk"
-PREFERRED_PROVIDER_virtual/${SDK_PREFIX}libc-initial-nativesdk = "${TCLIBC}-initial-nativesdk"
-PREFERRED_PROVIDER_virtual/${SDK_PREFIX}libc-for-gcc-nativesdk = "${TCLIBC}-nativesdk"
+PREFERRED_PROVIDER_eglibc = "glibc"
 
 PREFERRED_PROVIDER_virtual/gettext ??= "gettext"
 PREFERRED_PROVIDER_linux-libc-headers-nativesdk = "linux-libc-headers-nativesdk"
@@ -60,7 +53,11 @@ require conf/distro/include/camol-jalimo.conf
 # Cambrionix Linux turns on thumb for armv4t machine according to this RFC:
 # http://lists.linuxtogo.org/pipermail/angstrom-distro-devel/2008-October/002714.html
 
-ARM_INSTRUCTION_SET ?= "arm"
+ARM_INSTRUCTION_SET ??= "thumb"
+ARM_INSTRUCTION_SET_armv4t ?= "arm"
+ARM_INSTRUCTION_SET_armv5te ?= "arm"
+ARM_INSTRUCTION_SET_armv6 ?= "arm"
+
 # "arm" "thumb"
 #    The instruction set the compiler should use when generating application
 #    code.  The kernel is always compiled with arm code at present.  arm code
@@ -70,7 +67,7 @@ ARM_INSTRUCTION_SET ?= "arm"
 #    slower.
 
 #Use this variable in feeds and other parts that need a URI
-CAMOL_URI ?= "http://feeds.angstrom-distribution.org"
+CAMOL_URI ?= "http://feeds.camol-distribution.org"
 
 #Use this variable to select which recipe you want to use to get feed configs (/etc/ipkg/, /etc/apt/sources.list)
 # usefull for derivative distros and local testing
@@ -121,7 +118,7 @@ require conf/distro/include/camol-package-${CAMOL_PKG_FORMAT}.inc
 #
 # so for machines which do not define it lets define it to be empty
 
-MACHINE_KERNEL_PR ??= ""
+MACHINE_KERNEL_PR ??= "r0"
 
 # We don't want to keep OABI compat
 ARM_KEEP_OABI = "0"
@@ -150,11 +147,23 @@ INHERIT += "image-prelink"
 IMAGE_NAME = "${DISTRO_NAME}-${IMAGE_BASENAME}-${TCLIBC}-${CAMOL_PKG_FORMAT}-${DISTRO_VERSION}-${MACHINE}"
 DEPLOY_DIR_IMAGE = "${DEPLOY_DIR}/images/${MACHINE}"
 
+# Prefer ext4 images where possible
+SDIMG_ROOTFS_TYPE = "ext4"
+
 # Cambrionix Linux *always* has some form of release config, so error out if someone thinks he knows better 
 DISTRO_CHECK := "${@bb.data.getVar("DISTRO_VERSION",d,1) or bb.fatal('Remove this line or set a dummy DISTRO_VERSION if you really want to build an unversioned distro')}"
 
 # We want images supporting the following features (for packagegroup(-core)-base)
 DISTRO_FEATURES = "alsa argp bluetooth ext2 ipv4 ipv6 irda largefile nfs pam pci pcmcia ppp smbfs systemd usbgadget usbhost vfat wifi xattr zeroconf"
+
+# Disable sysvinit for recipes with systemd support
+DISTRO_FEATURES_BACKFILL_CONSIDERED += "sysvinit"
+VIRTUAL-RUNTIME_init_manager = "systemd"
+# Uncomment to completely disable support for sysv scripts:
+#PACKAGECONFIG_pn-systemd = "xz"
+
+# Enable systemd support in kernels
+KERNEL_ENABLE_CGROUPS = "1"
 
 # USE-flag like features
 DISTRO_FEATURES += "tk"
@@ -163,10 +172,10 @@ DISTRO_FEATURES += "3g"
 DISTRO_FEATURES += "pulseaudio"
 
 # OpenGL support
-DISTRO_GLFEATURES_x86 = "opengl"
-DISTRO_GLFEATURES    ?= ""
+DISTRO_FEATURES += "opengl"
 
-DISTRO_FEATURES += "${DISTRO_GLFEATURES}"
+# Enable wayland
+DISTRO_FEATURES += "wayland"
 
 # Inherit the default LIBC features superset from OE-core
 DISTRO_FEATURES += "${DISTRO_FEATURES_LIBC}"

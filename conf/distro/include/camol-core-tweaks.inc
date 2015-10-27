@@ -15,6 +15,10 @@ BB_SIGNATURE_HANDLER ?= "OEBasicHash"
 # Empty commercial license, we want to build a superset for the default config
 COMMERCIAL_LICENSE = ""
 LICENSE_FLAGS_WHITELIST += "commercial"
+ACCEPT_QCOM_EULA = "1"
+
+# Unbreak multimachine builds
+LICENSE_DIRECTORY = "${DEPLOY_DIR}/licenses/${MACHINE_ARCH}"
 
 # Preset set this or bbappends break
 PRINC ??= "0"
@@ -38,6 +42,8 @@ KEEPUIMAGE = ""
 PREFERRED_PROVIDER_opkg-collateral = "camol-feed-configs"
 EXTRA_IMAGE_FEATURES ??= "package-management"
 
+PREFERRED_PROVIDER_os-release = "camol-version"
+
 # Prefer libjpeg-turbo
 PREFERRED_PROVIDER_jpeg = "libjpeg-turbo"
 PREFERRED_PROVIDER_jpeg-native = "libjpeg-turbo-native"
@@ -47,23 +53,6 @@ PREFERRED_PROVIDER_virtual/libx11 = "libx11"
 PREFERRED_PROVIDER_virtual/xserver-xf86 = "xserver-xorg"
 PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
 
-XSERVER_qemux86 = "xserver-xorg \
-                   mesa-dri-driver-swrast \
-                   xf86-input-vmmouse \
-                   xf86-input-keyboard \
-                   xf86-input-evdev \
-                   xf86-video-vmware \
-                   qemugl"
-
-XSERVER_qemux86-64 = "xserver-xorg \
-                      mesa-dri-driver-swrast \
-                      xf86-input-vmmouse \
-                      xf86-input-keyboard \
-                      xf86-input-evdev \
-                      xf86-video-vmware \
-                      qemugl"
-
-
 # bitbake.conf stuff:
 
 TOOLCHAIN_PATH ?= "${STAGING_DIR_NATIVE}${prefix_native}/bin/${TUNE_PKGARCH}${HOST_VENDOR}-${HOST_OS}"
@@ -71,7 +60,7 @@ TOOLCHAIN_SYSPATH ?= "${TOOLCHAIN_PATH}/${TARGET_SYS}"
 
 # Package manager selection, camol uses CAMOL_PKG_FORMAT
 
-PACKAGE_CLASSES = " "
+PACKAGE_CLASSES = "package_ipk"
 
 # Image.bbclass stuff:
 
@@ -81,16 +70,16 @@ FILESYSTEM_PERMS_TABLES = "fs-perms-camol.txt"
 #
 # udev, devfsd, busybox-mdev (from busybox) or none
 #
-IMAGE_DEV_MANAGER ?= "${@base_contains("MACHINE_FEATURES", "kernel26",  "udev","",d)} "
+IMAGE_DEV_MANAGER ?= "udev"
 #
 # sysvinit, upstart, systemd
 #
 IMAGE_INIT_MANAGER ?= "systemd"
 IMAGE_INITSCRIPTS ?= "systemd-compat-units"
 #
-# tinylogin, getty
+# busybox, getty
 #
-IMAGE_LOGIN_MANAGER ?= "tinylogin"
+IMAGE_LOGIN_MANAGER ?= "busybox"
 
 # set sane default for the SPLASH variable
 SPLASH ?= ""
