@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=3f40d7994397109285ec7b81fdeb3
 
 PR = "r10"
 
-inherit packagegroup
-
 # packages which content depend on MACHINE_FEATURES need to be MACHINE_ARCH
 #
 PACKAGE_ARCH = "${MACHINE_ARCH}"
+
+inherit packagegroup
 
 # Poke extra recomendations into the list using your machine.conf
 #
