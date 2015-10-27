@@ -57,7 +57,7 @@ RRECOMMENDS_${PN} = "\
 	iperf \
 	hdparm \
 	\
-	${@base_contains("DISTRO_FEATURES", "bluetooth", "bluez4", "", d)} \
+	${@base_contains("DISTRO_FEATURES", "bluetooth", "bluez5", "", d)} \
 	${@base_contains("DISTRO_FEATURES", "wifi", "iw wpa-supplicant", "", d)} \
 	\
 	tzdata \
