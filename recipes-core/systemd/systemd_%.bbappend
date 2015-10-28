@@ -18,7 +18,7 @@ do_install_append() {
 	install -d ${D}${base_prefix}/usr/bin
 	install -m 0700 ${WORKDIR}/first_boot.sh ${D}/usr/bin
 	install -d ${D}${includedir}/systemd
-	install -m 0644 ${WORKDIR}/systemd/sd-daemon.h ${D}${includedir}/systemd
+	install -m 0644 ${WORKDIR}/git/src/systemd/sd-daemon.h ${D}${includedir}/systemd
 }
 
 FILES_${PN} += " ${base_libdir}/systemd \
