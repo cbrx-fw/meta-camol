@@ -1,22 +1,11 @@
-PRINC := "${@int(PRINC) + 2}"
-
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRCREV = "24442f3b2598fbd0654aaf9d1370d596fedc83be"
-SRC_URI = "git://anongit.freedesktop.org/systemd/systemd;protocol=git \
-           file://gtk-doc.make \
-           file://touchscreen.rules \
-           file://modprobe.rules \
-           file://var-run.conf \
-           ${UCLIBCPATCHES} \
+SRC_URI = "file://var-run.conf \
            file://journald.conf \
            file://camol.conf \
            file://first_boot.service \
            file://first_boot.sh \
 "
-LIC_FILES_CHKSUM = "file://LICENSE.GPL2;md5=751419260aa954499f7abaabaa882bbe \
-                    file://LICENSE.LGPL2.1;md5=4fbd65380cdd255951079008b364516c \
-                    file://LICENSE.MIT;md5=544799d0b492f119fa04641d1b8868ed"
 
 do_install_append() {
 	cp ${WORKDIR}/journald.conf ${D}${sysconfdir}/systemd

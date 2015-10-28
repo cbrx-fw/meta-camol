@@ -1,22 +1,21 @@
 #!/bin/sh
 
-# Set the system clock from hardware clock
-# If the timestamp is 1 day or more recent than the current time,
-# use the timestamp instead.
+if [ "$1" != "--save" ] ; then
+
+# Set the system clock from timestamp file
+# if the timestamp is 1 minute or more recent
+# than the current systemtime.
+
 SYSTEMDATE=$(/bin/date -u "+%4Y%2m%2d%2H%2M")
 
-YEAR=$(cat /etc/timestamp | cut -b 9-12)
-MONTH=$(cat /etc/timestamp | cut -b 1-2)
-DAY=$(cat /etc/timestamp | cut -b 3-4)
-TIME=$(cat /etc/timestamp | cut -b 5-8)
+TIMESTAMP=$(/bin/cat /etc/timestamp 2>/dev/null)
 
-TIMESTAMP="$YEAR$MONTH$DAY$TIME"
-
-if [ $SYSTEMDATE -lt $TIMESTAMP ]; then 
+if [ $SYSTEMDATE -lt $TIMESTAMP ] 2>/dev/null ; then
 	echo "Update systemtime from /etc/timestamp"
-	date -u $(cat /etc/timestamp)
+	/bin/date -u ${TIMESTAMP#????}${TIMESTAMP%????????}
 fi
 
-if [ "$1" = "--save" ] ; then
-	/bin/date -u +%2m%2d%2H%2M%4Y > /etc/timestamp
+else
+# Store the current systemtime in /etc/timestamp
+	/bin/date -u +%4Y%2m%2d%2H%2M > /etc/timestamp
 fi
