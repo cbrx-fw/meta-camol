@@ -21,9 +21,6 @@ do_install_append() {
 	install -m 0644 systemd/sd-daemon.h ${D}${includedir}/systemd
 }
 
-do_stage_append() {
-}
-
 FILES_${PN} += " ${base_libdir}/systemd \
 		${base_prefix}/usr/bin \
 "
