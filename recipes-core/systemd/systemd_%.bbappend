@@ -17,11 +17,11 @@ do_install_append() {
 	ln -s ../first_boot.service ${D}${base_libdir}/systemd/system/multi-user.target.wants/first_boot.service
 	install -d ${D}${base_prefix}/usr/bin
 	install -m 0700 ${WORKDIR}/first_boot.sh ${D}/usr/bin
+	install -d ${D}${includedir}/systemd
+	install -m 0644 systemd/sd-daemon.h ${D}${includedir}/systemd
 }
 
 do_stage_append() {
-	install -d ${STAGING_INCDIR}/systemd
-	install -m 0644 systemd/sd-daemon.h ${STAGING_INCDIR}/systemd
 }
 
 FILES_${PN} += " ${base_libdir}/systemd \
