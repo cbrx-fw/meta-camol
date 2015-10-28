@@ -1,6 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRC_URI = "file://var-run.conf \
+SRC_URI += "file://var-run.conf \
            file://journald.conf \
            file://camol.conf \
            file://first_boot.service \
