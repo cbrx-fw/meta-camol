@@ -26,9 +26,6 @@ PRINC ??= "0"
 # Shared state fixups
 MACHINEOVERRIDES[vardepsexclude] += "SOC_FAMILY"
 
-# Fix kernel
-KEEPUIMAGE = ""
-
 # Tuning and package arch compatibility
 
 # Turn armv7a-vfp-neon into armv7a for compatibility reasons
@@ -40,7 +37,7 @@ KEEPUIMAGE = ""
 
 # opkg
 PREFERRED_PROVIDER_opkg-collateral = "camol-feed-configs"
-EXTRA_IMAGE_FEATURES ??= "package-management"
+EXTRA_IMAGE_FEATURES ?= "package-management empty-root-password"
 
 PREFERRED_PROVIDER_os-release = "camol-version"
 

@@ -1,14 +1,12 @@
 # This recipe is intended as a 'simpler' replacement for packagegroup-base.
 # Please communicate your use cases and suggestions to the mailinglist(s)
 
-DESCRIPTION = "Basic task to get a device online"
+SUMMARY = "Basic task to get a device online"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
 
-PR = "r10"
+PR = "r11"
 
-# packages which content depend on MACHINE_FEATURES need to be MACHINE_ARCH
-#
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
@@ -23,9 +21,6 @@ MACHINE_EXTRA_RRECOMMENDS ?= ""
 #
 TASK_BASIC_SSHDAEMON ?= "dropbear openssh-sftp openssh-sftp-server"
 
-RPROVIDES_${PN} += "task-basic"
-RREPLACES_${PN} += "task-basic"
-RCONFLICTS_${PN} += "task-basic"
 #
 # The section below is designed to match with packagegroup-boot, but doesn't depend on it to allow for more freedom 
 # when writing image recipes.
@@ -37,7 +32,6 @@ RCONFLICTS_${PN} += "task-basic"
 RDEPENDS_${PN} = "\
     ${TASK_BASIC_SSHDAEMON} \
     bonjour bonjour-dev bonjour-camol systemd-compat-units \
-    nfs-utils-client \
 "
 
 #
@@ -51,11 +45,6 @@ RRECOMMENDS_${PN} = "\
 	${@base_contains("MACHINE_FEATURES", "usbhost", "usbutils", "", d)} \
 	${@base_contains("MACHINE_FEATURES", "alsa", "alsa-utils-alsamixer", "", d)} \
 	${@base_contains("MACHINE_FEATURES", "usbgadget", "kernel-module-g-ether kernel-module-g-serial kernel-module-g-mass-storage", "", d)} \
-	${@base_contains("MACHINE_FEATURES", "pci", "pciutils", "", d)} \
-	${@base_contains("MACHINE_FEATURES", "screen", "fb-test", "", d)} \
-	i2c-tools \
-	iperf \
-	hdparm \
 	\
 	${@base_contains("DISTRO_FEATURES", "bluetooth", "bluez5", "", d)} \
 	${@base_contains("DISTRO_FEATURES", "wifi", "iw wpa-supplicant", "", d)} \
