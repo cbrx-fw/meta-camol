@@ -38,6 +38,11 @@ do_install() {
 	ln -s ../bonjour.service ${D}${base_libdir}/systemd/system/multi-user.target.wants/bonjour.service
 }
 
+do_clean() {
+	oe_runmake -C ${S}/mDNSPosix clean
+	oe_runmake -C ${S}/Clients clean
+}
+
 FILES_${PN} = "${base_libdir}/systemd \
 		/usr/sbin \
 		"
