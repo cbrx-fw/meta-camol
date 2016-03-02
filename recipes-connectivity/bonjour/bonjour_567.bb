@@ -18,6 +18,7 @@ PARALLEL_MAKE = ""
 do_compile() {
 	oe_runmake -C ${S}/mDNSPosix Daemon
 	oe_runmake -C ${S}/mDNSPosix libdns_sd
+	oe_runmake -C ${S}/mDNSPosix nss_mdns
 	oe_runmake -C ${S}/Clients
 }
 
@@ -28,7 +29,7 @@ do_install() {
 	install -m 0755 Clients/build/dns-sd ${D}${sbindir}/dns-sd
 
 	install -d ${D}${includedir}
-	install -m 0755 mDNSShared/dns_sd.h ${D}${includedir}
+	install -m 0644 mDNSShared/dns_sd.h ${D}${includedir}
 	install -d ${D}${libdir}
 	install -m 0755 mDNSPosix/build/prod/libdns_sd.so ${D}${libdir}
 
@@ -36,11 +37,22 @@ do_install() {
 	install -m 0644 ${S}/../bonjour.service ${D}${base_libdir}/systemd/system
 	# systemd configuration
 	ln -s ../bonjour.service ${D}${base_libdir}/systemd/system/multi-user.target.wants/bonjour.service
+
+	install -d ${D}${sysconfdir}
+	install -m 0444 mDNSPosix/nss_mdns.conf ${D}${sysconfdir}
+	install -m 0755 mDNSPosix/build/prod/libnss_mdns-0.2.so ${D}${base_libdir}
+	install -m 0755 mDNSPosix/build/prod/libnss_mdns.so.2 ${D}${base_libdir}
 }
+
+PACKAGES =+ "${PN}-nss"
 
 FILES_${PN} = "${base_libdir}/systemd \
 		/usr/sbin \
 		"
+
+FILES_${PN}-nss = "${sysconfdir} \
+                   ${base_libdir}/libnss_mdns* \
+"
 
 SRC_URI[md5sum] = "6eff6d243a12a3d4b6fca03c05a9893b"
 SRC_URI[sha256sum] = "3239d9bb1e1e017be1ae12cff90802194b6e0312de628a1f324530b00b833018"
