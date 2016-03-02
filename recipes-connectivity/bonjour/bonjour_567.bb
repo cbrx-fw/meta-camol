@@ -41,7 +41,7 @@ do_install() {
 	install -d ${D}${sysconfdir}
 	install -m 0444 mDNSPosix/nss_mdns.conf ${D}${sysconfdir}
 	install -m 0755 mDNSPosix/build/prod/libnss_mdns-0.2.so ${D}${base_libdir}
-	install -m 0755 mDNSPosix/build/prod/libnss_mdns.so.2 ${D}${base_libdir}
+	ln -s ./libnss_mdns-0.2.so ${D}${base_libdir}/libnss_mdns.so.2
 }
 
 PACKAGES =+ "${PN}-nss"
