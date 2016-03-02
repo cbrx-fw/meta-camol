@@ -46,13 +46,25 @@ do_install() {
 
 PACKAGES =+ "${PN}-nss"
 
-FILES_${PN} = "${base_libdir}/systemd \
-		/usr/sbin \
-		"
+FILES_${PN} =  "${base_libdir}/systemd \
+		${libdir}/libdns_sd.o \
+		${sbindir} \
+"
 
 FILES_${PN}-nss = "${sysconfdir} \
                    ${base_libdir}/libnss_mdns* \
 "
+
+pkg_postinst_${PN}-nss () {
+	sed -e '/^hosts:/s/\s*\<mdns4\>//' \
+		-e 's/\(^hosts:.*\)\(\<files\>\)\(.*\)\(\<dns\>\)\(.*\)/\1\2 mdns\3\4\5/' \
+		-i $D/etc/nsswitch.conf
+}
+
+pkg_prerm_${PN}-nss () {
+	sed -e '/^hosts:/s/\s*\<mdns\>//' \
+		-i /etc/nsswitch.conf
+}
 
 SRC_URI[md5sum] = "6eff6d243a12a3d4b6fca03c05a9893b"
 SRC_URI[sha256sum] = "3239d9bb1e1e017be1ae12cff90802194b6e0312de628a1f324530b00b833018"
