@@ -37,7 +37,7 @@ RCONFLICTS_${PN} += "task-basic"
 RDEPENDS_${PN} = "\
     ${TASK_BASIC_SSHDAEMON} \
     bonjour bonjour-dev bonjour-camol systemd-compat-units \
-    nfs-utils-client \
+    nfs-utils-client bonjour-nss rssh \
 "
 
 #
