@@ -47,7 +47,6 @@ do_install() {
 PACKAGES =+ "${PN}-nss"
 
 FILES_${PN} =  "${base_libdir}/systemd \
-		${libdir}/libdns_sd.o \
 		${sbindir} \
 "
 
