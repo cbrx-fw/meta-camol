@@ -32,6 +32,8 @@ TASK_BASIC_SSHDAEMON ?= "dropbear openssh-sftp openssh-sftp-server"
 RDEPENDS_${PN} = "\
     ${TASK_BASIC_SSHDAEMON} \
     bonjour bonjour-dev bonjour-camol systemd-compat-units \
+    nfs-utils-client bonjour-nss rssh pybonjour python-ctypes \
+    python-shell \
 "
 
 #
@@ -45,6 +47,9 @@ RRECOMMENDS_${PN} = "\
 	${@base_contains("MACHINE_FEATURES", "usbhost", "usbutils", "", d)} \
 	${@base_contains("MACHINE_FEATURES", "alsa", "alsa-utils-alsamixer", "", d)} \
 	${@base_contains("MACHINE_FEATURES", "usbgadget", "kernel-module-g-ether kernel-module-g-serial kernel-module-g-mass-storage", "", d)} \
+	i2c-tools \
+	iperf \
+	hdparm \
 	\
 	${@base_contains("DISTRO_FEATURES", "bluetooth", "bluez5", "", d)} \
 	${@base_contains("DISTRO_FEATURES", "wifi", "iw wpa-supplicant", "", d)} \

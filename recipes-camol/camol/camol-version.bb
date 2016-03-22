@@ -48,6 +48,11 @@ do_install() {
 
 	echo "${@get_layers(bb, d)}" > ${D}${sysconfdir}/camol-build-info
 
+	echo "NAME=Cambrionix Linux" > ${D}${sysconfdir}/os-release
+	echo "ID=camol" >> ${D}${sysconfdir}/os-release
+	echo "PRETTY_NAME=The Cambrionix Linux Distribution" >> ${D}${sysconfdir}/os-release
+	echo "ANSI_COLOR=1;35" >> ${D}${sysconfdir}/os-release
+
 	install -d ${D}${bindir}
 	install -m 0755 ${WORKDIR}/lsb_release ${D}${bindir}/
 }
