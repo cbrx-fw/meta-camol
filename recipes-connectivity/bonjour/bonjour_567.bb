@@ -53,7 +53,8 @@ FILES_${PN} =  "${base_libdir}/systemd \
 		${sbindir} \
 "
 
-FILES_${PN}-dev =  ""
+FILES_${PN}-dev =  "${includedir} \
+"
 
 FILES_${PN}-nss = "${sysconfdir} \
                    ${base_libdir}/libnss_mdns* \
