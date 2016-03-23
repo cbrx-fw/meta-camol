@@ -30,10 +30,9 @@ do_install() {
 
 	install -d ${D}${includedir}
 	install -m 0644 mDNSShared/dns_sd.h ${D}${includedir}
-	install -d ${D}${libdir}
-	install -m 0755 mDNSPosix/build/prod/libdns_sd.so ${D}${libdir}
 
 	install -d ${D}${base_libdir}/systemd/system/multi-user.target.wants/
+	install -m 0755 mDNSPosix/build/prod/libdns_sd.so ${D}${base_libdir}
 	install -m 0644 ${S}/../bonjour.service ${D}${base_libdir}/systemd/system
 	# systemd configuration
 	ln -s ../bonjour.service ${D}${base_libdir}/systemd/system/multi-user.target.wants/bonjour.service
