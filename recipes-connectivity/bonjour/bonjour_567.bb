@@ -49,6 +49,7 @@ do_configure() {
 PACKAGES =+ "${PN}-nss"
 
 FILES_${PN} =  "${base_libdir}/systemd \
+		${base_libdir}/libdns_sd.so \
 		${sbindir} \
 "
 
