@@ -3,7 +3,7 @@ DESCRIPTION = "Small image capable of bootstraping AUFS."
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
-PACKAGE_INSTALL = "busybox initramfs-module-initfs initramfs-module-rorootfs"
+PACKAGE_INSTALL = "busybox initramfs-module-initfs initramfs-module-rorootfs initramfs-files"
 IMAGE_FSTYPES = "${INITRAMFS_FSTYPES}"
 IMAGE_LINGUAS = ""
 IMAGE_FEATURES = ""
