@@ -48,7 +48,6 @@ RRECOMMENDS_${PN} = "\
 	${@base_contains("MACHINE_FEATURES", "alsa", "alsa-utils-alsamixer", "", d)} \
 	${@base_contains("MACHINE_FEATURES", "usbgadget", "kernel-module-g-ether kernel-module-g-serial kernel-module-g-mass-storage", "", d)} \
 	i2c-tools \
-	iperf \
 	hdparm \
 	\
 	${@base_contains("DISTRO_FEATURES", "bluetooth", "bluez5", "", d)} \
