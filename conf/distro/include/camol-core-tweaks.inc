@@ -62,7 +62,7 @@ PACKAGE_CLASSES = "package_ipk"
 # Image.bbclass stuff:
 
 # Override default fs-perms.txt that messes with our /var setup:
-FILESYSTEM_PERMS_TABLES = "fs-perms-camol.txt"
+FILESYSTEM_PERMS_TABLES = "files/fs-perms-camol.txt"
  
 #
 # udev, devfsd, busybox-mdev (from busybox) or none
