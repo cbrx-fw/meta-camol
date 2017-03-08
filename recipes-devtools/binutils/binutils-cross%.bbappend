@@ -1,2 +1,2 @@
-FILESEXTRAPATHS_append := "recipes-devtools/binutils/binutils"
+FILESEXTRAPATHS_append := "${THISDIR}/files"
 
