@@ -6,6 +6,5 @@ PR = "r0"
 
 inherit packagegroup
 
-RDEPENDS_${PN} = "busybox-syslog-systemd \
-                  openssl \
+RDEPENDS_${PN} = "openssl \
 "
