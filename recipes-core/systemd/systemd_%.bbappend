@@ -24,3 +24,6 @@ do_install_append() {
 FILES_${PN} += " ${base_libdir}/systemd \
 		${base_prefix}/usr/bin \
 "
+
+PACKAGECONFIG_remove = "resolved"
+PACKAGECONFIG_remove = "networkd"
