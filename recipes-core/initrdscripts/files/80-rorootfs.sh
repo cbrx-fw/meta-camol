@@ -1,7 +1,13 @@
 #!/bin/sh
 
+if [ -e /dev/mmcblk0p1 ]; then
+  BOOT_DISK=/dev/mmcblk0
+else
+  BOOT_DISK=/dev/mmcblk1
+fi
+
 mkdir /rw
-mount /dev/mmcblk0p7 /rw
+mount ${BOOT_DISK}p7 /rw
 
 if [ -e /rw/boot/active ]; then
   ACTIVE=$(cat /rw/boot/active)
@@ -37,10 +43,10 @@ if [ -e /rw/boot/never_booted ]; then
 fi
 
 if [ ${ACTIVE} = 'A' ]; then
-  DRIVE='/dev/mmcblk0p5'
+  DRIVE="${BOOT_DISK}p5"
 fi
 if [ ${ACTIVE} = 'B' ]; then
-  DRIVE='/dev/mmcblk0p6'
+  DRIVE="${BOOT_DISK}p6"
 fi
 if [ ! ${DRIVE} ]; then
   echo Illegal active state
