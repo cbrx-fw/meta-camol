@@ -4,7 +4,7 @@ LICENSE = "Apache-2.0"
 
 PR = "r3"
 
-SRC_URI = "http://www.opensource.apple.com/darwinsource/tarballs/other/mDNSResponder-${PV}.tar.gz \
+SRC_URI = "https://opensource.apple.com/tarballs/mDNSResponder/mDNSResponder-${PV}.tar.gz \
            file://bonjour.service \
           "
 
