@@ -67,7 +67,7 @@ ARM_INSTRUCTION_SET_armv6 ?= "arm"
 #    slower.
 
 #Use this variable in feeds and other parts that need a URI
-CAMOL_URI ?= "http://feeds.cambrionix.com
+CAMOL_URI ?= "http://feeds.cambrionix.com"
 
 #Use this variable to select which recipe you want to use to get feed configs (/etc/ipkg/, /etc/apt/sources.list)
 # usefull for derivative distros and local testing
