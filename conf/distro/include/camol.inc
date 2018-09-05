@@ -67,7 +67,7 @@ ARM_INSTRUCTION_SET_armv6 ?= "arm"
 #    slower.
 
 #Use this variable in feeds and other parts that need a URI
-CAMOL_URI ?= "http://feeds.camol-distribution.org"
+CAMOL_URI ?= "http://feeds.cambrionix.com
 
 #Use this variable to select which recipe you want to use to get feed configs (/etc/ipkg/, /etc/apt/sources.list)
 # usefull for derivative distros and local testing
@@ -107,7 +107,7 @@ BUILDHISTORY_COMMIT = "1"
 #have a shared state a.k.a package-staging2
 INHERIT += "sstate"
 
-CAMOL_PKG_FORMAT ?= "ipk"
+CAMOL_PKG_FORMAT ?= "rpm"
 require conf/distro/include/camol-package-${CAMOL_PKG_FORMAT}.inc
 
 # MACHINE_KERNEL_PR if not defined can cause parsing failures
@@ -154,7 +154,7 @@ SDIMG_ROOTFS_TYPE = "ext4"
 DISTRO_CHECK := "${@d.getVar("DISTRO_VERSION",d,1) or bb.fatal('Remove this line or set a dummy DISTRO_VERSION if you really want to build an unversioned distro')}"
 
 # We want images supporting the following features (for packagegroup(-core)-base)
-DISTRO_FEATURES = "alsa argp bluetooth ext2 ipv4 ipv6 irda largefile nfs pam pci pcmcia ppp smbfs systemd usbgadget usbhost vfat wifi xattr zeroconf"
+DISTRO_FEATURES = "alsa argp bluetooth ext2 ipv4 ipv6 irda largefile nfs pam pci pcmcia ppp python-pygpgme smbfs systemd usbgadget usbhost vfat wifi xattr zeroconf"
 
 # Disable sysvinit for recipes with systemd support
 DISTRO_FEATURES_BACKFILL_CONSIDERED += "sysvinit"
@@ -166,16 +166,16 @@ VIRTUAL-RUNTIME_init_manager = "systemd"
 KERNEL_ENABLE_CGROUPS = "1"
 
 # USE-flag like features
-DISTRO_FEATURES += "tk"
-DISTRO_FEATURES += "x11"
-DISTRO_FEATURES += "3g"
-DISTRO_FEATURES += "pulseaudio"
+#DISTRO_FEATURES += "tk"
+#DISTRO_FEATURES += "x11"
+#DISTRO_FEATURES += "3g"
+#DISTRO_FEATURES += "pulseaudio"
 
 # OpenGL support
-DISTRO_FEATURES += "opengl"
+#DISTRO_FEATURES += "opengl"
 
 # Enable wayland
-DISTRO_FEATURES += "wayland"
+#DISTRO_FEATURES += "wayland"
 
 # Inherit the default LIBC features superset from OE-core
 DISTRO_FEATURES += "${DISTRO_FEATURES_LIBC}"
