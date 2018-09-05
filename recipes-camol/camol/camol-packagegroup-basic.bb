@@ -54,6 +54,18 @@ RRECOMMENDS_${PN} = "\
 	${@bb.utils.contains("DISTRO_FEATURES", "wifi", "iw wpa-supplicant", "", d)} \
 	\
 	tzdata \
+	tzdata-africa \
+	tzdata-americas \
+	tzdata-antartica \
+	tzdata-arctic \
+	tzdata-asia \
+	tzdata-atlantic \
+	tzdata-australia \
+	tzdata-europe \
+	tzdata-misc \
+	tzdata-pacific \
+	tzdata-posix \
+	tzdata-right \
 	\
 	cpufrequtils \
 	htop \
