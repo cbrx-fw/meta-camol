@@ -9,7 +9,7 @@ inherit packagegroup
 RDEPENDS_${PN} = "openssl \
                   tzdata-americas \
                   tzdata-africa \
-                  tzdata-antarctic \
+                  tzdata-antarctica \
                   tzdata-arctic \
                   tzdata-asia \
                   tzdata-atlantic \
