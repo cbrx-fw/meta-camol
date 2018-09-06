@@ -9,6 +9,7 @@ do_install_append () {
 	echo /usr/bin/rssh >> ${D}${sysconfdir}/shells
 	install -d ${D}/dev
 	mknod -m 622 ${D}/dev/console c 5 1
+	rmdir ${D}${prefix}/src
 }
 
 FILES_${PN} += " /dev "
