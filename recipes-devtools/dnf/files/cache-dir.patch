@@ -1,0 +1,64 @@
+diff --git a/dnf/const.py.in b/dnf/const.py.in
+index 44a204a4..504172d3 100644
+--- a/dnf/const.py.in
++++ b/dnf/const.py.in
+@@ -42,7 +42,7 @@ PERSISTDIR='/var/lib/dnf' # :api
+ PID_FILENAME = '/var/run/dnf.pid'
+ RUNDIR='/run'
+ USER_RUNDIR='/run/user'
+-SYSTEM_CACHEDIR='/var/cache/dnf'
++SYSTEM_CACHEDIR='/var/volatile/cache/dnf'
+ TMPDIR='/var/tmp/'
+ # CLI verbose values greater or equal to this are considered "verbose":
+ VERBOSE_LEVEL=6
+diff --git a/etc/collect_dnf.conf b/etc/collect_dnf.conf
+index b99721b1..1f3e815a 100644
+--- a/etc/collect_dnf.conf
++++ b/etc/collect_dnf.conf
+@@ -9,7 +9,7 @@ EVENT=notify component=dnf
+             done
+         }
+ 
+-        logs=`find /var/cache/dnf -iname '*.log'`
++        logs=`find /var/volatile/cache/dnf -iname '*.log'`
+         fetch $logs
+         fetch /var/log/dnf.log
+         # this would fail for a non-priviledged user
+diff --git a/etc/tmpfiles.d/dnf.conf b/etc/tmpfiles.d/dnf.conf
+index 4bd129f1..57a21c9d 100644
+--- a/etc/tmpfiles.d/dnf.conf
++++ b/etc/tmpfiles.d/dnf.conf
+@@ -1,5 +1,5 @@
+ # Unlink the dnf lock files during boot
+ R /var/tmp/dnf*/locks/*
+-r /var/cache/dnf/download_lock.pid
+-r /var/cache/dnf/metadata_lock.pid
++r /var/volatile/cache/dnf/download_lock.pid
++r /var/volatile/cache/dnf/metadata_lock.pid
+ r /var/lib/dnf/rpmdb_lock.pid
+diff --git a/tests/test_base.py b/tests/test_base.py
+index ef68191c..60ace474 100644
+--- a/tests/test_base.py
++++ b/tests/test_base.py
+@@ -62,7 +62,7 @@ class BaseTest(tests.support.TestCase):
+         base = dnf.Base()
+         self.assertIsNotNone(base.conf)
+         self.assertIsNotNone(base.conf.cachedir)
+-        reg = re.compile('/var/cache/dnf')
++        reg = re.compile('/var/volatile/cache/dnf')
+         self.assertIsNotNone(reg.match(base.conf.cachedir))
+         base.close()
+ 
+diff --git a/tests/test_cli.py b/tests/test_cli.py
+index ced87cb0..e7cb61d5 100644
+--- a/tests/test_cli.py
++++ b/tests/test_cli.py
+@@ -200,7 +200,7 @@ class ConfigureTest(tests.support.DnfBaseTestCase):
+         self.base._conf = dnf.conf.Conf()
+         with mock.patch('dnf.rpm.detect_releasever', return_value=69):
+             self.cli.configure(['update', '--nogpgcheck', '-c', self.conffile])
+-        reg = re.compile('^/var/cache/dnf$')
++        reg = re.compile('^/var/volatile/cache/dnf$')
+         self.assertIsNotNone(reg.match(self.base.conf.system_cachedir))
+         self.assertEqual(self.cli.cmdstring,
+                          "dnf update --nogpgcheck -c %s " % self.conffile)
