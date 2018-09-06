@@ -1,8 +1,8 @@
 diff --git a/dnf/const.py.in b/dnf/const.py.in
-index 44a204a4..504172d3 100644
+index 4f47ea70..1586102d 100644
 --- a/dnf/const.py.in
 +++ b/dnf/const.py.in
-@@ -42,7 +42,7 @@ PERSISTDIR='/var/lib/dnf' # :api
+@@ -39,7 +39,7 @@ PERSISTDIR='/var/lib/dnf' # :api
  PID_FILENAME = '/var/run/dnf.pid'
  RUNDIR='/run'
  USER_RUNDIR='/run/user'
@@ -37,23 +37,23 @@ index 4bd129f1..57a21c9d 100644
 +r /var/volatile/cache/dnf/metadata_lock.pid
  r /var/lib/dnf/rpmdb_lock.pid
 diff --git a/tests/test_base.py b/tests/test_base.py
-index ef68191c..60ace474 100644
+index 508bc434..837d54b4 100644
 --- a/tests/test_base.py
 +++ b/tests/test_base.py
-@@ -62,7 +62,7 @@ class BaseTest(tests.support.TestCase):
+@@ -42,7 +42,7 @@ class BaseTest(support.TestCase):
          base = dnf.Base()
          self.assertIsNotNone(base.conf)
          self.assertIsNotNone(base.conf.cachedir)
 -        reg = re.compile('/var/cache/dnf')
 +        reg = re.compile('/var/volatile/cache/dnf')
          self.assertIsNotNone(reg.match(base.conf.cachedir))
-         base.close()
  
+     @mock.patch('dnf.rpm.detect_releasever', lambda x: 'x')
 diff --git a/tests/test_cli.py b/tests/test_cli.py
-index ced87cb0..e7cb61d5 100644
+index f4ea27ee..7c2f16fd 100644
 --- a/tests/test_cli.py
 +++ b/tests/test_cli.py
-@@ -200,7 +200,7 @@ class ConfigureTest(tests.support.DnfBaseTestCase):
+@@ -186,7 +186,7 @@ class ConfigureTest(TestCase):
          self.base._conf = dnf.conf.Conf()
          with mock.patch('dnf.rpm.detect_releasever', return_value=69):
              self.cli.configure(['update', '--nogpgcheck', '-c', self.conffile])
