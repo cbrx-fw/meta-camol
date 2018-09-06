@@ -7,4 +7,16 @@ PR = "r0"
 inherit packagegroup
 
 RDEPENDS_${PN} = "openssl \
+                  tzdata-americas \
+                  tzdata-africa \
+                  tzdata-antarctic \
+                  tzdata-arctic \
+                  tzdata-asia \
+                  tzdata-atlantic \
+                  tzdata-australia \
+                  tzdata-europe \
+                  tzdata-misc \
+                  tzdata-pacific \
+                  tzdata-posix \
+                  tzdata-right \
 "
