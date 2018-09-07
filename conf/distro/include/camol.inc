@@ -107,7 +107,7 @@ BUILDHISTORY_COMMIT = "1"
 #have a shared state a.k.a package-staging2
 INHERIT += "sstate"
 
-CAMOL_PKG_FORMAT ?= "rpm"
+CAMOL_PKG_FORMAT ?= "ipk"
 require conf/distro/include/camol-package-${CAMOL_PKG_FORMAT}.inc
 
 # MACHINE_KERNEL_PR if not defined can cause parsing failures

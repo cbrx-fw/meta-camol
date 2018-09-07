@@ -57,7 +57,7 @@ TOOLCHAIN_SYSPATH ?= "${TOOLCHAIN_PATH}/${TARGET_SYS}"
 
 # Package manager selection, camol uses CAMOL_PKG_FORMAT
 
-PACKAGE_CLASSES = "package_rpm"
+PACKAGE_CLASSES = "package_ipk"
 
 # Image.bbclass stuff:
 
